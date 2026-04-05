@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battleship — Naval Command | Taylor Carter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">Taylor Carter</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#projects" class="active">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="https://github.com/tccarte" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-detail">
+
+    <a href="index.html" class="back-link">&#8592; Back to home</a>
+
+    <div class="project-header">
+      <span class="badge">Team Project &nbsp;·&nbsp; CPSC 3750 — Internet Application Development</span>
+      <h1>Battleship — Naval Command</h1>
+      <p class="subtitle">
+        A full-stack web Battleship game with a hunt/target AI opponent, local 2-player
+        mode, persistent player stats, and a REST API built for automated grading.
+      </p>
+      <div class="project-cta">
+        <a href="http://lightslategray-dogfish-869967.hostingersite.com/" target="_blank" rel="noopener" class="btn btn-primary">&#9654; View Live App</a>
+        <a href="https://github.com/tccarte" target="_blank" rel="noopener" class="btn btn-outline">View on GitHub</a>
+      </div>
+      <div class="tag-list">
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">REST API</span>
+        <span class="tag">AJAX</span>
+        <span class="tag">Sessions</span>
+      </div>
+    </div>
+
+    <div class="project-body">
+
+      <h2>What It Does</h2>
+      <p>
+        Players deploy a fleet of 5 ships on a 10×10 grid and take turns firing at the
+        opponent's board to sink their fleet. The app supports two modes: single-player
+        against a computer opponent using a hunt/target AI strategy, and local 2-player
+        with handoff screens to keep each player's board hidden between turns.
+      </p>
+      <p>
+        Player statistics (wins, losses, total moves) are stored persistently in MySQL,
+        and a leaderboard tracks all-time records. Game state is also saved to
+        localStorage so a browser refresh doesn't lose an in-progress match.
+      </p>
+
+      <h2>Architecture</h2>
+      <p>
+        The frontend handles all UI, ship placement, and fires shots via AJAX. The
+        backend is split into two layers — the game server manages session-based state
+        and never exposes the computer's ship positions to the client, while a separate
+        stateless REST API handles authenticated grading endpoints.
+      </p>
+      <div class="arch-block">Browser ──AJAX──► game.php ──► $_SESSION + MySQL
+Grader  ──HTTP──► api.php  ──► MySQL</div>
+      <p>
+        The key architecture decision was keeping all authoritative game state on the
+        server in PHP sessions. The client only stores temporary UI state (what ship
+        you're currently placing), which prevents any client-side cheating and keeps
+        the AI's ship positions hidden until game over.
+      </p>
+
+      <h2>AI Strategy</h2>
+      <p>
+        The computer opponent uses a two-phase hunt/target algorithm. In hunt mode it
+        fires randomly. Once it scores a hit it switches to target mode, adding all
+        adjacent cells to a queue and systematically working through them until the
+        ship sinks, then returns to hunt mode.
+      </p>
+
+      <h2>My Contributions</h2>
+      <div class="contrib-box">
+        <h4>Taylor Carter — Backend &amp; Game Engine</h4>
+        <ul>
+          <li>Designed and implemented the core game engine (<code>game.php</code>) with PHP session-based state management</li>
+          <li>Built all frontend game logic (<code>script.js</code>) including ship placement, firing, PvP handoff screens, and localStorage state recovery</li>
+          <li>Built and integrated the REST API layer (<code>api.php</code>) with full CRUD endpoints and authenticated test-mode support</li>
+          <li>Deployed and hosted the live site on Hostinger</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Taylor Carter &nbsp;·&nbsp; <a href="https://github.com/tccarte" target="_blank" rel="noopener">github.com/tccarte</a></p>
+  </footer>
+
+</body>
+</html>

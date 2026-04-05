@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Price Checker | Taylor Carter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">Taylor Carter</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#projects" class="active">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="https://github.com/tccarte" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-detail">
+
+    <a href="index.html" class="back-link">&#8592; Back to home</a>
+
+    <div class="project-header">
+      <span class="badge">Solo Project</span>
+      <h1>Stock Price Checker</h1>
+      <p class="subtitle">
+        A Flask web app that fetches live stock data from the Alpha Vantage API and
+        renders daily, weekly, or monthly price charts directly in the browser as SVG.
+      </p>
+      <div class="project-cta">
+        <!-- TODO: replace href with your deployed URL once live -->
+        <a href="#" class="btn btn-primary">&#9654; View Live App</a>
+        <a href="https://github.com/tccarte" target="_blank" rel="noopener" class="btn btn-outline">View on GitHub</a>
+      </div>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">Flask</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Alpha Vantage API</span>
+        <span class="tag">SVG</span>
+      </div>
+    </div>
+
+    <div class="project-body">
+
+      <h2>What It Does</h2>
+      <p>
+        Users enter a stock ticker symbol (e.g., AAPL, TSLA) and choose a time
+        interval — daily, weekly, or monthly. The app calls the Alpha Vantage API to
+        retrieve historical price data, then generates a price chart and returns it
+        inline as SVG so no image files are needed.
+      </p>
+      <p>
+        Invalid ticker symbols are caught before chart generation using the Alpha
+        Vantage Company Overview endpoint, redirecting users back with a clear error
+        rather than crashing on a bad API response.
+      </p>
+
+      <h2>Architecture</h2>
+      <p>
+        Built with Python and Flask. All data fetching and chart generation happens
+        server-side — the client gets back a fully rendered HTML page with the SVG
+        chart embedded directly. Matplotlib's non-interactive <code>Agg</code> backend
+        is used to generate charts in memory without a display server.
+      </p>
+      <div class="arch-block">User submits form
+    ↓
+Flask validates ticker via Company Overview API
+    ↓
+Fetch time-series data (daily / weekly / monthly)
+    ↓
+Matplotlib renders chart → SVG string in memory
+    ↓
+Return rendered HTML with embedded SVG</div>
+      <p>
+        The key architecture decision was rendering charts as SVG strings in memory
+        rather than saving image files to disk. This keeps the server stateless —
+        no file cleanup needed, no storage cost, and SVGs scale perfectly at any
+        screen resolution.
+      </p>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li>Live stock data via Alpha Vantage REST API</li>
+        <li>Three time intervals: daily, weekly, monthly</li>
+        <li>In-memory SVG chart generation with Matplotlib</li>
+        <li>Ticker validation before chart generation to handle invalid symbols gracefully</li>
+        <li>Clean redirect flow — bad input goes back to the form, not a crash page</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Taylor Carter &nbsp;·&nbsp; <a href="https://github.com/tccarte" target="_blank" rel="noopener">github.com/tccarte</a></p>
+  </footer>
+
+</body>
+</html>
