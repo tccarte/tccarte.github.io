@@ -98,14 +98,20 @@ nav {
 
 .hero-text { flex: 1; }
 
+.hero-identity {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .profile-photo {
-  width: 100px;
-  height: 100px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--border);
-  margin-bottom: 1.25rem;
-  display: block;
+  flex-shrink: 0;
 }
 
 .hero-eyebrow {
